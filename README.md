@@ -1,136 +1,237 @@
-# QualityForge — Manual & Automated Testing Framework
-**Tailored for the Strive Logic LLC QA Analyst Role**
-**Candidate:** Sarah Jenkins (QA Analyst Candidate)
-**Framework Version:** 1.2.1 | Python 3.10+ | Playwright | Pytest | SQLite
+# QualityForge — QA Automation Framework
+<img width="1918" height="858" alt="Screenshot 2026-10-16 053051" src="https://github.com/user-attachments/assets/b5e87fe2-fcf1-449f-a86f-239746eaf547" />
+<img width="1913" height="861" alt="Screenshot 2026-10-16 053145" src="https://github.com/user-attachments/assets/d4be6917-9e59-4495-bf17-40afe34e6659" />
+<img width="1911" height="873" alt="Screenshot 2026-10-16 052955" src="https://github.com/user-attachments/assets/fb0f9587-57e4-4edc-bfd7-2c4f930210b8" />
 
----
+**A portfolio project demonstrating Manual Testing, UI Automation, API Testing, SQL Validation, and Defect Tracking.**
 
-## 1. Executive Summary & Objective
+## Overview
 
-QualityForge is a comprehensive software quality assurance framework and interactive test execution platform built specifically to demonstrate the full spectrum of Software Testing Life Cycle (STLC) responsibilities required by **Strive Logic LLC**.
+QualityForge is an end-to-end Quality Assurance (QA) portfolio project designed to demonstrate practical software testing skills across the Software Testing Life Cycle (STLC). It focuses on identifying defects, validating application functionality, automating repetitive test scenarios, and documenting test results.
 
-The framework tests a realistic e-commerce application under test (**NovaStore**) encompassing:
-- User Authentication & Session Security (JWT tokens, password policies)
-- Dynamic Catalog Search & Responsive Category Filtering
-- Shopping Cart State Management & Mathematical Boundary Calculation
-- End-to-End Checkout with Address Validation, Tax Calculation, and Free-Shipping Thresholds
-- Order Processing Idempotency & Relational Database Integrity in SQLite
-- Defect Logging & Controlled Bug Verification (DEF-001, DEF-002, DEF-003)
+The project uses a demo e-commerce application to demonstrate how a QA analyst tests real-world user workflows.
 
----
+## Objectives
 
-## 2. Technology Stack & Architectural Decisions
+- Create and execute structured manual test cases.
+- Perform functional, smoke, regression, and retesting activities.
+- Automate UI tests using Playwright and pytest.
+- Validate API endpoints and response data.
+- Perform database validation using SQL.
+- Document defects with reproducible steps and severity levels.
+- Generate test reports and summarize testing outcomes.
+- Integrate automated tests into a CI workflow using GitHub Actions.
 
-| Layer / Capability | Technology Selected | Rationale & Job Alignment |
-|---|---|---|
-| **Programming Language** | Python 3.10+ | Industry-standard language for modern automation, readable fixtures, and high maintainability. |
-| **Browser Automation** | Playwright for Python | Fast, reliable multi-browser automation with auto-waiting, explicit assertions, and stable locator strategies. |
-| **Test Runner & Execution** | Pytest 8.x | Robust fixture ecosystem, parameterized test execution, and rich plugin support. |
-| **API Contract Testing** | Python `requests` + JSON Schema | Validates HTTP status codes, payload contracts, security headers, and latency. |
-| **Database Validation** | SQLite 3 (Python `sqlite3`) | Verifies relational integrity, foreign key constraints, order math, and duplicate detection. |
-| **Continuous Integration** | GitHub Actions (`.github/workflows/qa-ci.yml`) | Automated test runs on pull requests with JUnit XML & HTML report publishing. |
-| **Reporting & Dashboards** | Allure / JUnit XML / HTML Test Reports | Machine-readable and executive-friendly reporting showing execution pass rates. |
+## Tech Stack
 
----
+| Technology | Purpose |
+|---|---|
+| Python | Test scripting and automation |
+| Playwright | Browser-based UI automation |
+| pytest | Test execution and organization |
+| Requests | API testing |
+| SQLite | Database validation |
+| SQL | Data integrity checks |
+| Pandas | Test result analysis |
+| HTML / JUnit XML | Test reporting |
+| Git & GitHub | Version control and collaboration |
+| GitHub Actions | Continuous integration |
 
-## 3. Project Directory Structure
+## Application Under Test
 
-```
-QualityForge/
-├── .github/
-│   └── workflows/
-│       └── qa-ci.yml               # GitHub Actions CI/CD Pipeline
+The demo e-commerce application is intended to cover the following workflows:
+
+- User registration and login
+- Product listing, search, and product details
+- Shopping cart operations
+- Checkout and order placement
+- Order history and order validation
+
+## Testing Coverage
+
+### 1. Manual Testing
+
+The project includes a structured test case repository covering:
+
+- Positive and negative test scenarios
+- Functional testing
+- Smoke testing
+- Regression testing
+- Boundary-value and input validation testing
+- Error handling and usability checks
+
+Each test case should document its ID, module, preconditions, test steps, test data, expected result, actual result, execution status, and remarks.
+
+### 2. UI Automation Testing
+
+Playwright and pytest are used to automate important user journeys, including:
+
+- Login validation
+- Product search
+- Cart management
+- Checkout workflows
+- Form validation and error handling
+
+### 3. API Testing
+
+API tests using Python Requests validate:
+
+- HTTP status codes
+- Response structures and data types
+- Required fields and error responses
+- Authentication and authorization behavior
+- Product, cart, and order operations where supported
+
+### 4. Database Testing
+
+SQL validation is used to check:
+
+- Data consistency
+- Order and user records
+- Cart and checkout results
+- Duplicate records and invalid data
+- Relationships between related records where applicable
+
+### 5. Defect Management
+
+Defects are documented with:
+
+- Defect ID and title
+- Environment and affected module
+- Preconditions and reproduction steps
+- Expected versus actual behavior
+- Severity and priority
+- Evidence and status
+
+### 6. Test Reporting and CI
+
+The reporting workflow is intended to provide execution summaries, passed and failed test counts, failure details, and machine-readable test results. GitHub Actions can run the automated suite on code changes.
+
+## Project Structure
+
+```text
+qualityforge-qa-automation/
 ├── app/
-│   ├── main.py                     # Demo E-Commerce FastAPI/Flask Application Under Test (AUT)
-│   ├── database.py                 # SQLite relational schema & seed scripts
-│   └── models.py                   # Pydantic data schemas & validation rules
 ├── tests/
 │   ├── manual/
-│   │   ├── test_plan.md            # IEEE 829-compliant Test Plan
-│   │   ├── manual_test_cases.csv   # 52 structured manual test cases
-│   │   └── rtm_matrix.md           # Requirements Traceability Matrix (RTM)
 │   ├── ui/
-│   │   ├── conftest.py             # Playwright browser fixtures & page objects
-│   │   ├── test_smoke.py           # Core smoke test verification
-│   │   ├── test_auth.py            # User registration, login, session expiry
-│   │   ├── test_cart.py            # Cart additions, deletions, quantity boundaries
-│   │   └── test_checkout.py        # Checkout forms, tax formulas, order placement
 │   ├── api/
-│   │   ├── test_products_api.py    # GET /products endpoint contract & schema
-│   │   ├── test_auth_api.py        # POST /auth/login status codes & JWT security
-│   │   └── test_orders_api.py      # POST /orders validation & idempotency checks
 │   └── database/
-│       └── test_sqlite_validation.py # SQL queries for FK integrity & order total math
 ├── test_data/
-│   ├── users.json                  # Synthetic predictable test user accounts
-│   ├── products.json               # Seed catalog items with stable SKUs
-│   └── test_cards.json             # Synthetic test payment instruments
 ├── bug_reports/
-│   ├── defect_register.csv         # Structured bug tracker with full lifecycle
-│   ├── DEF-001_cart_subtotal.md    # Defect report: Cart total not updating on quantity change
-│   ├── DEF-002_zip_validation.md   # Defect report: Checkout accepting invalid postal code
-│   └── DEF-003_duplicate_order.md  # Defect report: Duplicate order creation on double-submit
 ├── reports/
-│   ├── junit_report.xml            # Generated machine-readable JUnit XML test report
-│   └── test_report.html            # Interactive visual HTML test execution report
-├── pytest.ini                      # Pytest configuration, markers, and CLI flags
-├── requirements.txt                # Pinned Python package dependencies
-└── README.md                       # Comprehensive framework documentation
+├── docs/
+├── .github/
+│   └── workflows/
+├── requirements.txt
+├── pytest.ini
+├── .gitignore
+└── README.md
 ```
 
----
+*The directory structure may be adjusted to match the implemented repository.*
 
-## 4. Quick Start & Execution Guide
+## Getting Started
 
 ### Prerequisites
-- Python 3.10 or higher
-- Node.js 20+ (for local web preview)
 
-### 1. Installation
+- Python 3.11 or later
+- Git
+- A supported browser installed through Playwright
+
+### Installation
+
+Clone the repository:
+
 ```bash
-# Create and activate Python virtual environment
-python3 -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+git clone https://github.com/jiten54/qualityforge-qa-automation.git
+cd qualityforge-qa-automation
+```
 
-# Install all framework dependencies
+Create and activate a virtual environment.
+
+**Windows PowerShell:**
+
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
+```
+
+**macOS / Linux:**
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
 pip install -r requirements.txt
-
-# Install Playwright browser binaries
-playwright install chromium
+playwright install
 ```
 
-### 2. Launch Application Under Test (AUT)
+### Run Automated Tests
+
+Run the complete pytest suite:
+
 ```bash
-# Start local demo e-commerce app
-python app/main.py
-# Application accessible at http://localhost:8000
+pytest
 ```
 
-### 3. Run Automated Test Suites
+Run specific test suites if configured:
+
 ```bash
-# Run Smoke Test Suite
-pytest -m smoke --html=reports/smoke_report.html
-
-# Run Browser Automation Suite (Playwright)
-pytest tests/ui/ --headed --browser chromium
-
-# Run REST API Test Suite
-pytest tests/api/ -v
-
-# Run SQLite Database Integrity Suite
-pytest tests/database/ -v
-
-# Run Complete End-to-End Suite with JUnit XML output
-pytest --junitxml=reports/junit_report.xml --html=reports/test_report.html
+pytest tests/ui/
+pytest tests/api/
+pytest tests/database/
 ```
 
----
+The exact commands depend on the test files and configuration included in the repository.
 
-## 5. Controlled Defect Reproduction & Retesting
+## Sample Test Case
 
-To demonstrate defect verification and retesting workflows:
-1. In the Web UI **Application Under Test (AUT)** tab, locate the **Controlled Defect Mode** panel.
-2. Toggle **Bug #1 (DEF-001)** to reproduce the cart subtotal freezing issue when quantity increments.
-3. Toggle **Bug #2 (DEF-002)** to verify checkout postal code validation bypass.
-4. Toggle **Bug #3 (DEF-003)** to verify double-submission race conditions.
-5. In the **Defect Tracker**, advance tickets through their realistic STLC lifecycle states: **New -> Assigned -> Fixed -> Retest -> Closed**.
+| Field | Example |
+|---|---|
+| Test Case ID | TC-LOGIN-001 |
+| Module | Login |
+| Scenario | Login with valid credentials |
+| Preconditions | User account exists |
+| Test Steps | Open login page, enter valid credentials, submit |
+| Expected Result | User successfully reaches the authenticated area |
+| Actual Result | Record after execution |
+| Status | Not Executed until tested |
+
+**Important:** Test results must reflect actual execution. Do not mark a test as passed unless it has been run and its expected behavior verified.
+
+## Learning Outcomes
+
+This project is designed to demonstrate practical understanding of:
+
+- SDLC and STLC
+- Test planning and test case design
+- Manual and automated testing
+- Bug reporting and defect lifecycle
+- API and database validation
+- Regression testing
+- Test execution reports
+- Version control and CI workflows
+
+## Future Improvements
+
+- Add cross-browser testing.
+- Expand negative and edge-case coverage.
+- Integrate Allure reporting.
+- Add performance testing for selected endpoints.
+- Improve CI reporting and failure artifacts.
+
+## Disclaimer
+
+QualityForge is an independent QA portfolio project created for learning and demonstration purposes. It is not affiliated with or endorsed by any employer. Features, test coverage, and execution results should be considered implemented only when verified in the repository.
+
+## Author
+
+**Jiten Moni Das**
+
+GitHub: [@jiten54](https://github.com/jiten54)
+
