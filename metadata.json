@@ -1,0 +1,6 @@
+{
+  "name": "QualityForge — Manual & Automated Testing Framework",
+  "description": "Production-grade QA testing framework and execution suite tailored for Strive Logic LLC QA Analyst role. Demonstrates SDLC/STLC methodologies, 50+ manual test cases, Playwright UI automation, REST API testing, SQLite database validation, defect lifecycle management, and HTML/JUnit test reports.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

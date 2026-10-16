@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<testsuites name="QualityForge Automation Suites" tests="12" failures="2" time="4.12">
+  <testsuite name="Smoke Tests" tests="3" failures="0" time="1.41">
+    <testcase classname="tests.ui.test_smoke" name="test_homepage_launch_and_navigation" time="0.420" />
+    <testcase classname="tests.ui.test_auth" name="test_user_successful_authentication" time="0.510" />
+    <testcase classname="tests.ui.test_cart" name="test_add_to_cart_and_drawer_display" time="0.480" />
+  </testsuite>
+  <testsuite name="Functional Tests" tests="3" failures="1" time="1.68">
+    <testcase classname="tests.ui.test_catalog" name="test_product_search_and_filter" time="0.450" />
+    <testcase classname="tests.ui.test_cart" name="test_cart_quantity_mutation_and_totals" time="0.590">
+      <failure message="AssertionError: Expected subtotal '$399.98', but found '$199.99'. Cart total did not recalculate when quantity incremented from 1 to 2. (DEF-001)">
+        AssertionError: Expected subtotal '$399.98', but found '$199.99'.
+        at tests/ui/test_cart.py:38
+      </failure>
+    </testcase>
+    <testcase classname="tests.ui.test_checkout" name="test_checkout_end_to_end_order_submission" time="0.640" />
+  </testsuite>
+  <testsuite name="API Tests" tests="3" failures="0" time="0.63">
+    <testcase classname="tests.api.test_products_api" name="test_api_get_products_list_and_schema" time="0.210" />
+    <testcase classname="tests.api.test_auth_api" name="test_api_auth_invalid_credentials_returns_401" time="0.180" />
+    <testcase classname="tests.api.test_orders_api" name="test_api_order_creation_payload_validation" time="0.240" />
+  </testsuite>
+  <testsuite name="Database Tests" tests="2" failures="0" time="0.35">
+    <testcase classname="tests.database.test_sqlite_validation" name="test_sqlite_referential_integrity_foreign_keys" time="0.160" />
+    <testcase classname="tests.database.test_sqlite_validation" name="test_sqlite_order_financial_arithmetic_consistency" time="0.190" />
+  </testsuite>
+  <testsuite name="Regression Tests" tests="1" failures="1" time="0.49">
+    <testcase classname="tests.ui.test_regression" name="test_regression_postal_code_regex_validation" time="0.490">
+      <failure message="AssertionError: Expected validation error for invalid postal code 'ABCDE', but checkout form submitted successfully. (DEF-002)">
+        AssertionError: Checkout form accepted invalid postal code 'ABCDE'
+        at tests/ui/test_regression.py:24
+      </failure>
+    </testcase>
+  </testsuite>
+</testsuites>

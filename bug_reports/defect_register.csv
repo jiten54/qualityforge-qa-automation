@@ -1,0 +1,5 @@
+Bug ID,Summary,Module,Severity,Priority,Status,Assignee,Reporter,Detected In,Fixed In
+DEF-001,"Cart subtotal and grand total fail to recalculate when item quantity is modified","Shopping Cart",Critical,P1,Assigned,"David Chen","Sarah Jenkins",v1.2.0-rc3,v1.2.1
+DEF-002,"Checkout form accepts non-numeric and truncated postal/ZIP codes without validation error","Checkout",Major,P1,Fixed,"Elena Rostova","Sarah Jenkins",v1.2.0-rc2,v1.2.1-hotfix
+DEF-003,"Double-clicking 'Place Order' creates duplicate order records and duplicate payment charges","Order Processing",Critical,P1,Retest,"Alex Rivera","Sarah Jenkins",v1.2.0-rc1,v1.2.1
+DEF-004,"Product search query is case-sensitive on SKU prefix searches","Search / Catalog",Minor,P3,Closed,"David Chen","Sarah Jenkins",v1.1.9,v1.2.0
